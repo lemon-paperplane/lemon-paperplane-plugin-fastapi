@@ -1,0 +1,48 @@
+{
+  "plugin.name": "FastAPI",
+  "plugin.description": "识别 FastAPI 应用，用 uvicorn 运行，打开接口文档",
+  "run.app": "FastAPI",
+
+  "opt.mode": "启动方式",
+  "opt.mode.uvicorn": "uvicorn",
+  "opt.mode.script": "运行入口脚本",
+  "opt.mode.info": "入口脚本自己调用 uvicorn.run 时（常在启动前注册路由、建表），用「运行入口脚本」。",
+  "opt.app": "应用",
+  "opt.app.info": "uvicorn 的加载目标，格式为 模块:变量，如 main:app、app.main:app。",
+  "opt.script": "入口脚本",
+  "opt.host": "监听地址",
+  "opt.port": "端口",
+  "opt.reload": "代码变化自动重载",
+  "opt.factory": "应用工厂函数",
+  "opt.args": "附加参数",
+  "opt.workingDir": "工作目录",
+  "opt.envFile": "环境变量文件",
+  "opt.envFile.info": "启动前读取的 .env 文件，相对模块目录；留空则不读。",
+  "opt.env": "环境变量",
+
+  "info.framework": "框架",
+
+  "step.installUvicorn": "环境里没有 uvicorn，正在安装",
+
+  "err.noScript": "没有指定入口脚本",
+  "err.noApp": "没有找到 FastAPI 应用，请在运行配置里填写「应用」",
+
+  "msg.installed": "已安装 {0}",
+  "msg.docsDisabled": "应用关闭了接口文档（docs_url=None）",
+
+  "diag.portInUse.title": "端口 {0} 已被占用",
+  "diag.importModule.title": "uvicorn 找不到模块 {1}",
+  "diag.importModule.message": "检查运行配置里的「应用」与工作目录。",
+  "diag.attribute.title": "模块 {2} 里没有 {1}",
+  "diag.multipart.title": "表单与上传需要 python-multipart",
+  "diag.emailValidator.title": "EmailStr 需要 email-validator",
+  "diag.noUvicorn.title": "环境里没有 uvicorn",
+
+  "fix.usePort": "改用端口 {0}",
+  "fix.reimport": "重新识别应用",
+  "fix.installMultipart": "安装 python-multipart",
+  "fix.installEmailValidator": "安装 email-validator",
+  "fix.installUvicorn": "安装 uvicorn",
+
+  "action.openDocs": "打开接口文档"
+}

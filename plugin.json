@@ -1,0 +1,99 @@
+{
+  "id": "fastapi",
+  "name": "%plugin.name%",
+  "version": "0.1.0",
+  "vendor": "Lemon Paperplane",
+  "description": "%plugin.description%",
+  "icon": "icons/fastapi.svg",
+  "category": "framework",
+  "engines": {"paperplane": ">=0.1.0 <0.2.0"},
+  "protocol": 1,
+  "executable": "bin/paperplane-plugin-fastapi",
+  "dependencies": [{"id": "python"}],
+  "activation": {"facets": ["python"]},
+  "contributes": {
+    "facets": [
+      {"id": "fastapi", "name": "FastAPI", "icon": "icons/fastapi.svg", "category": "framework", "priority": 80}
+    ],
+    "runConfigurationTypes": [
+      {
+        "id": "fastapi-app",
+        "name": "%run.app%",
+        "icon": "icons/fastapi.svg",
+        "facets": ["fastapi"],
+        "options": [
+          {"key": "mode", "title": "%opt.mode%", "type": "select", "default": "uvicorn", "options": [{"value": "uvicorn", "label": "%opt.mode.uvicorn%"}, {"value": "script", "label": "%opt.mode.script%"}], "info": "%opt.mode.info%"},
+          {"key": "app", "title": "%opt.app%", "type": "select", "optionsFrom": "fastapi.apps", "placeholder": "main:app", "info": "%opt.app.info%"},
+          {"key": "script", "title": "%opt.script%", "type": "path", "placeholder": "main.py"},
+          {"key": "host", "title": "%opt.host%", "type": "string", "default": "127.0.0.1"},
+          {"key": "port", "title": "%opt.port%", "type": "number", "default": 8000},
+          {"key": "reload", "title": "%opt.reload%", "type": "boolean", "default": true},
+          {"key": "factory", "title": "%opt.factory%", "type": "boolean", "advanced": true},
+          {"key": "args", "title": "%opt.args%", "type": "string"},
+          {"key": "workingDir", "title": "%opt.workingDir%", "type": "path", "advanced": true},
+          {"key": "envFile", "title": "%opt.envFile%", "type": "path", "default": ".env", "info": "%opt.envFile.info%"},
+          {"key": "env", "title": "%opt.env%", "type": "keyvalue"}
+        ]
+      }
+    ],
+    "ideRunConfigTypes": ["Python.FastAPI"],
+    "urlPatterns": [
+      {"hint": "Uvicorn running on", "pattern": "Uvicorn running on (https?)://(?:0\\.0\\.0\\.0|\\[::\\]|::):(\\d+)", "url": "{1}://127.0.0.1:{2}", "ready": true, "facets": ["fastapi"]},
+      {"hint": "Uvicorn running on", "pattern": "Uvicorn running on (https?://(?:127\\.0\\.0\\.1|localhost|[1-9][\\d.]*\\d|[A-Za-z][\\w.-]*):\\d+)", "ready": true, "facets": ["fastapi"]}
+    ],
+    "readyPatterns": [
+      {"hint": "Application startup complete", "pattern": "Application startup complete", "facets": ["fastapi"]}
+    ],
+    "diagnostics": [
+      {
+        "id": "fastapi.import-module",
+        "hint": "Error loading ASGI app",
+        "pattern": "Error loading ASGI app\\. Could not import module \"([^\"]+)\"",
+        "severity": "error",
+        "title": "%diag.importModule.title%",
+        "message": "%diag.importModule.message%",
+        "facets": ["fastapi"],
+        "fixes": [{"id": "reimport", "title": "%fix.reimport%", "kind": "reimport"}]
+      },
+      {
+        "id": "fastapi.attribute",
+        "hint": "Error loading ASGI app",
+        "pattern": "Error loading ASGI app\\. Attribute \"([^\"]+)\" not found in module \"([^\"]+)\"",
+        "severity": "error",
+        "title": "%diag.attribute.title%",
+        "facets": ["fastapi"],
+        "fixes": [{"id": "reimport", "title": "%fix.reimport%", "kind": "reimport"}]
+      },
+      {
+        "id": "fastapi.multipart",
+        "hint": "python-multipart",
+        "pattern": "requires \"python-multipart\"|Form data requires \"python-multipart\"",
+        "severity": "error",
+        "title": "%diag.multipart.title%",
+        "facets": ["fastapi"],
+        "fixes": [{"id": "installPackage", "title": "%fix.installMultipart%", "kind": "custom", "params": {"package": "python-multipart"}, "recommended": true}]
+      },
+      {
+        "id": "fastapi.email-validator",
+        "hint": "email-validator",
+        "pattern": "email-validator is not installed",
+        "severity": "error",
+        "title": "%diag.emailValidator.title%",
+        "facets": ["fastapi"],
+        "fixes": [{"id": "installPackage", "title": "%fix.installEmailValidator%", "kind": "custom", "params": {"package": "email-validator"}, "recommended": true}]
+      },
+      {
+        "id": "fastapi.no-cli",
+        "hint": "No module named uvicorn",
+        "pattern": "No module named uvicorn",
+        "severity": "error",
+        "title": "%diag.noUvicorn.title%",
+        "facets": ["fastapi"],
+        "fixes": [{"id": "installPackage", "title": "%fix.installUvicorn%", "kind": "custom", "params": {"package": "uvicorn[standard]"}, "recommended": true}]
+      }
+    ],
+    "actions": [
+      {"id": "openDocs", "title": "%action.openDocs%", "icon": "builtin:external-link", "facets": ["fastapi"], "group": "open", "locations": ["run.toolbar", "project.menu"]}
+    ]
+  }
+}

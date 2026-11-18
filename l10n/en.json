@@ -1,0 +1,48 @@
+{
+  "plugin.name": "FastAPI",
+  "plugin.description": "Detect FastAPI applications, run them with uvicorn and open the API docs",
+  "run.app": "FastAPI",
+
+  "opt.mode": "Start with",
+  "opt.mode.uvicorn": "uvicorn",
+  "opt.mode.script": "Entry script",
+  "opt.mode.info": "Use Entry script when the script calls uvicorn.run itself (often after registering routes or creating tables).",
+  "opt.app": "Application",
+  "opt.app.info": "uvicorn import target in the form module:variable, such as main:app or app.main:app.",
+  "opt.script": "Entry script",
+  "opt.host": "Host",
+  "opt.port": "Port",
+  "opt.reload": "Reload on code changes",
+  "opt.factory": "Application factory",
+  "opt.args": "Extra arguments",
+  "opt.workingDir": "Working directory",
+  "opt.envFile": "Env file",
+  "opt.envFile.info": ".env file loaded before start, relative to the module directory; leave empty to skip.",
+  "opt.env": "Environment variables",
+
+  "info.framework": "Framework",
+
+  "step.installUvicorn": "uvicorn is not installed in the environment, installing",
+
+  "err.noScript": "No entry script specified",
+  "err.noApp": "No FastAPI application found; set Application in the run configuration",
+
+  "msg.installed": "Installed {0}",
+  "msg.docsDisabled": "The application disables API docs (docs_url=None)",
+
+  "diag.portInUse.title": "Port {0} is already in use",
+  "diag.importModule.title": "uvicorn cannot import module {1}",
+  "diag.importModule.message": "Check Application and the working directory in the run configuration.",
+  "diag.attribute.title": "{1} not found in module {2}",
+  "diag.multipart.title": "Forms and uploads require python-multipart",
+  "diag.emailValidator.title": "EmailStr requires email-validator",
+  "diag.noUvicorn.title": "uvicorn is not installed",
+
+  "fix.usePort": "Use port {0}",
+  "fix.reimport": "Detect the application again",
+  "fix.installMultipart": "Install python-multipart",
+  "fix.installEmailValidator": "Install email-validator",
+  "fix.installUvicorn": "Install uvicorn",
+
+  "action.openDocs": "Open API Docs"
+}
